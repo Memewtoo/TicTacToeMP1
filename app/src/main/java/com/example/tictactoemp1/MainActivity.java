@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, TwoPlayersActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, TwoPlayerActivity.class);
+                startActivity(intent);
 
             }
         });
