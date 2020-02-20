@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class SinglePlayerActivity extends AppCompatActivity {
-    String playerturn = "Player 1 turn.";
+    String yourturn = "Your turn.";
     TextView textView_winner, textView_turn;
     boolean computerturn = true;
 
@@ -20,12 +20,12 @@ public class SinglePlayerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_two_player);
+        setContentView(R.layout.activity_single_player);
 
         textView_winner = findViewById(R.id.textview_winner);
         textView_turn = findViewById(R.id.textview_turn);
 
-        textView_turn.setText(playerturn);
+        textView_turn.setText(yourturn);
 
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -48,7 +48,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
 
                         if(checkWin()){
                             if(player1_turn){
-                                textView_winner.setText(R.string.player1win);
+                                textView_winner.setText(R.string.youwin);
                                 computerturn = false;
                                 resetBoard();
                             }
@@ -123,7 +123,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
         }
         round_count = 0;
         player1_turn = true;
-        textView_turn.setText(playerturn);
+        textView_turn.setText(yourturn);
     }
 
     public void randomPlay(){
@@ -177,13 +177,13 @@ public class SinglePlayerActivity extends AppCompatActivity {
 
     public void computerMove(){
         randomPlay();
-        textView_turn.setText(R.string.player1turn);
+        textView_turn.setText(R.string.your_turn);
 
         round_count++;
 
         if(checkWin()){
             if(player1_turn){
-                textView_winner.setText(R.string.player1win);
+                textView_winner.setText(R.string.youwin);
                 resetBoard();
             }
             else{

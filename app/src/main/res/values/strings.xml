@@ -7,4 +7,6 @@
     <string name="player2turn">Player 2 turn.</string>
     <string name="computerwin">Computer Win</string>
     <string name="computerturn">Computer\'s turn.</string>
+    <string name="youwin">You win!</string>
+    <string name="your_turn">Your turn.</string>
 </resources>
