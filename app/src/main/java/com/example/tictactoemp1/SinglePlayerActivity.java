@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class SinglePlayerActivity extends AppCompatActivity {
     String playerturn = "Player 1 turn.";
     TextView textView_winner, textView_turn;
+    boolean computerturn = true;
 
     private Button[][] buttons = new Button[3][3];
     private boolean player1_turn = true;
@@ -23,7 +24,6 @@ public class SinglePlayerActivity extends AppCompatActivity {
 
         textView_winner = findViewById(R.id.textview_winner);
         textView_turn = findViewById(R.id.textview_turn);
-
 
         textView_turn.setText(playerturn);
 
@@ -39,56 +39,44 @@ public class SinglePlayerActivity extends AppCompatActivity {
                             return;
                         }
 
-//                        if(player1_turn) {
-                            player1_turn = true;
-                            ((Button) v).setText("X");
-                            textView_turn.setText(R.string.computerturn);
+                        player1_turn = true;
+                        computerturn = true;
+                        ((Button) v).setText("X");
+                        textView_turn.setText(R.string.computerturn);
 
+                        round_count++;
+
+                        if(checkWin()){
+                            if(player1_turn){
+                                textView_winner.setText(R.string.player1win);
+                                computerturn = false;
+                                resetBoard();
+                            }
+                            else{
+                                textView_winner.setText(R.string.computerwin);
+                                computerturn = false;
+                                resetBoard();
+                            }
+                        }
+
+                        else if(round_count == 9){
+                            textView_winner.setText(R.string.draw);
+                            computerturn = false;
+                            resetBoard();
+                        }
+
+                        if(computerturn) {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    randomPlay();
-                                    textView_turn.setText(R.string.player1turn);
-
-                                    round_count++;
-
-                                    if(checkWin()){
-                                        if(player1_turn){
-                                            textView_winner.setText(R.string.player1win);
-                                            resetBoard();
-                                        }
-                                        else{
-                                            textView_winner.setText(R.string.computerwin);
-                                            resetBoard();
-                                        }
-                                    }
-
-                                    else if(round_count == 9){
-                                        textView_winner.setText(R.string.draw);
-                                        resetBoard();
-                                    }
-                                }
-                            },1000);
-
-//                        }
-
-//                        else{
-//                            randomPlay();
-//                            textView_turn.setText(R.string.player1turn);
-//                        }
-
-
-
-//                        else{
-////                            player1_turn = !player1_turn;
-////                        }
-
+                                    computerMove();
+                                    player1_turn = false;
+                                }}, 250);
+                        }
                     }
                 });
             }
         }
-
-
     }
 
     private boolean checkWin(){
@@ -185,6 +173,29 @@ public class SinglePlayerActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    public void computerMove(){
+        randomPlay();
+        textView_turn.setText(R.string.player1turn);
+
+        round_count++;
+
+        if(checkWin()){
+            if(player1_turn){
+                textView_winner.setText(R.string.player1win);
+                resetBoard();
+            }
+            else{
+                textView_winner.setText(R.string.computerwin);
+                resetBoard();
+            }
+        }
+
+        else if(round_count >= 9) {
+            textView_winner.setText(R.string.draw);
+            resetBoard();
+        }
     }
 
 }
