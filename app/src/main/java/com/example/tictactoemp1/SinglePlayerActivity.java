@@ -42,6 +42,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
                         player1_turn = true;
                         computerturn = true;
                         ((Button) v).setText("X");
+                        setButtonsdisabled();
                         textView_turn.setText(R.string.computerturn);
 
                         round_count++;
@@ -124,6 +125,7 @@ public class SinglePlayerActivity extends AppCompatActivity {
         round_count = 0;
         player1_turn = true;
         textView_turn.setText(yourturn);
+        setButtonsenabled();
     }
 
     public void randomPlay(){
@@ -195,6 +197,24 @@ public class SinglePlayerActivity extends AppCompatActivity {
         else if(round_count >= 9) {
             textView_winner.setText(R.string.draw);
             resetBoard();
+        }
+
+        setButtonsenabled();
+    }
+
+    public void setButtonsdisabled(){
+        for(int i = 0; i<3;i++){
+            for(int j = 0; j < 3; j++){
+                buttons[i][j].setEnabled(false);
+            }
+        }
+    }
+
+    public void setButtonsenabled(){
+        for(int i = 0; i<3;i++){
+            for(int j = 0; j < 3; j++){
+                buttons[i][j].setEnabled(true);
+            }
         }
     }
 
